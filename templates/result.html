@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeLi Travels</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+.footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            bottom: 0;
+            width: 100%;
+        }
+        header {
+            background-image: url("https://images.unsplash.com/photo-1488342994276-7c3bc0742042?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ymx1ciUyMGNpdHl8ZW58MHx8MHx8fDA%3D");
+            color: white;
+            padding: 10em;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-size: 20px; /* Fixed the missing unit (px) */
+            text-align: center;
+            margin: 0;
+            background-size: cover; /* Changed to cover for better image scaling */
+        }
+
+        nav {
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        nav a {
+            display: inline-block; /* Changed to inline-block for better alignment */
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+        }
+nav img {
+            height: 15px;
+            width: 25px;
+            margin-right: 10px;
+        }
+        .container {
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .prediction-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .prediction-box p {
+            margin: 5px 0;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="#">
+                <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Travel with KeLi">
+            </a>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#" style="float: right;">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1 style="font-size: 80px; color: white;">KeLi Travels</h1>
+    </header>
+
+    <div class="container">
+       <center><h1>Flight Prices</h1></center>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Predicted Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prediction in predictions %}
+                <tr>
+                    <td>{{ prediction.Date }}</td>
+                    <td>{{ prediction.Predicted_Price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        &copy; 2024 KeLi Travels. All rights reserved.
+    </footer>
+</body>
+</html>

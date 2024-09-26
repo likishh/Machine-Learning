@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeLi Travels</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-image: url("https://images.unsplash.com/photo-1488342994276-7c3bc0742042?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ymx1ciUyMGNpdHl8ZW58MHx8MHx8fDA%3D");
+            color: white;
+            padding: 10em;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-size: 20px; /* Fixed the missing unit (px) */
+            text-align: center;
+            margin: 0;
+            background-size: cover; /* Changed to cover for better image scaling */
+        }
+
+        nav {
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        nav a {
+            display: inline-block; /* Changed to inline-block for better alignment */
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            display: inline-block;
+        }
+
+        nav img {
+            height: 25px;
+            width: 25px;
+            margin-right: 10px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: black;
+        }
+
+        .container {
+            padding: 20px; /* Added padding for better spacing */
+        }
+
+        .img-thumbnail {
+            height: 350px;
+            width: 350px;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+
+        .img-thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        blockquote {
+            font-family: 'Courier', monospace;
+            text-align: center;
+            font-size: 120%;
+        }
+
+        .form-container {
+            margin: 50px auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .flight-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .flight-form input[type="date"],
+        .flight-form input[type="time"],
+        .flight-form select,
+        .flight-form input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .flight-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .flight-form button:hover {
+            background-color: #555;
+        }
+    </style>
+    <script>
+        function setMinDate() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd; // yyyy/mm/dd format for setting min attribute
+            document.getElementById("journeyDate").setAttribute('min', today);
+        }
+
+        function formatJourneyDate(input) {
+            var value = input.value;
+            if (value.length === 2 || value.length === 5) {
+                input.value += '/';
+            }
+        }
+
+        function updateDestination() {
+            var source = document.getElementById("source");
+            var destination = document.getElementById("destination");
+
+            destination.options.selectedIndex = -1; // Deselect any previously selected option
+
+            for (var i = 0; i < destination.options.length; i++) {
+                if (destination.options[i].value === source.value) {
+                    destination.options[i].disabled = true;
+                } else {
+                    destination.options[i].disabled = false;
+                }
+            }
+        }
+
+        window.onload = function() {
+            setMinDate();
+        };
+    </script>
+    <script>
+        // Function to toggle visibility of prediction result section
+        function togglePredictionResult() {
+            var predictionResultSection = document.getElementById("predictionResult");
+            if (predictionResultSection.style.display === "none") {
+                predictionResultSection.style.display = "block";
+            } else {
+                predictionResultSection.style.display = "none";
+            }
+        }
+
+        // Function to clear all input fields
+        function clearFields() {
+            document.getElementById("journeyDate").value = "";
+            document.getElementById("depTime").value = "";
+            document.getElementById("arrivalTime").value = "";
+            document.getElementById("airline").selectedIndex = 0;
+            document.getElementById("source").selectedIndex = 0;
+            document.getElementById("destination").selectedIndex = 0;
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="#">
+                <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Travel with KeLi">
+            </a>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#" style="float: right;">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1 style="font-size: 80px; color: white;">KeLi Travels</h1>
+    </header>
+
+    <div class="container">
+        <p style="font-family:courier;text-align:center; font-size:120%;">“Travel far enough, you meet yourself.”</p>
+    </div>
+
+    <center>
+        <h2>Check the Price of Your Flight even before booking now 🥳</h2>
+        <div class="form-container">
+            <form method="post" action="/predict" class="flight-form" onsubmit="togglePredictionResult();">
+                <label for="journeyDate">Journey Date (DD/MM/YYYY)</label>
+                <input type="text" id="journeyDate" name="journeyDate" placeholder="DD/MM/YYYY" oninput="formatJourneyDate(this)" pattern="\d{2}/\d{2}/\d{4}" required>
+
+                <label for="depTime">Departure Time</label>
+                <input id="depTime" type="time" name="depTime" required>
+
+                <label for="arrivalTime">Arrival Time</label>
+                <input type="time" id="arrivalTime" name="arrivalTime" required>
+
+                <label for="airline">Airline</label>
+                <select name="airline" id="airline" required>
+                    <option value="Air Asia">Air Asia</option>
+                    <option value="Air India">Air India</option>
+                    <option value="GoAir">GoAir</option>
+                    <option value="IndiGo">IndiGo</option>
+                    <option value="Jet Airways">Jet Airways</option>
+                    <option value="SpiceJet">SpiceJet</option>
+                    <option value="Vistara">Vistara</option>
+                </select>
+
+                <label for="source">Source</label>
+                <select id="source" name="source" onchange="updateDestination()" required>
+                    <option value="Banglore">Banglore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+
+                <label for="destination">Destination </label>
+                <select id="destination" name="destination" required>
+                    <option value="New Delhi">New Delhi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Cochin">Cochin</option>
+                    <option value="Banglore">Banglore</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                </select>
+
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+    </center>
+
+    <footer class="footer">
+        &copy; 2024 KeLi Travels. All rights reserved.
+    </footer>
+</body>
+</html>
